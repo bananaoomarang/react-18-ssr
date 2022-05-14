@@ -1,11 +1,10 @@
+const express = require('express')
 const createError = require('http-errors')
-const app = require('express')()
+const app = express()
 
 if (process.env.NODE_ENV === 'development') {
   app.use(function (req, res, next) {
     const ssrRouter = require('dist/ssr-router').app.default
-
-    logger.info('reloaded router...')
 
     return ssrRouter(req, res, next)
   })
@@ -13,6 +12,8 @@ if (process.env.NODE_ENV === 'development') {
   const ssrRouter = require('dist/ssr-router').app.default
   app.use(ssrRouter)
 }
+
+app.use(express.static('public'))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
