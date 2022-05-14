@@ -1,4 +1,9 @@
+import { Route, Switch } from 'react-router-dom'
+import routes from '../routes/routes'
+
 const App = () => (
-  <h1>my app</h1>
+  <>
+    {routes.map((route, index) => <Route key={index} {...route} />)}
+  </>
 )
 export default App

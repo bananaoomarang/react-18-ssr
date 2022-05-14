@@ -1,8 +1,13 @@
 import { renderToPipeableStream } from 'react-dom/server'
+import { matchPath } from 'react-router-dom'
+import routes from './routes'
 import Layout from './Layout'
 
 const router = (req, res, next) => {
-  const stream = renderToPipeableStream(<Layout />, {
+  const route = routes.find(() => matchPath(req.path, route))
+  const staticRouteContext = {}
+
+  const stream = renderToPipeableStream(<Layout location={req.url} context={staticRouteContext} />, {
     onShellReady () {
       res.status(200)
       res.setHeader('Content-type', 'text/html')
