@@ -1,3 +1,9 @@
-import React from 'react'
+import { hydrateRoot } from 'react-dom/client'
+import App from './App'
 
-console.log('yay')
+const main = () => {
+  const root = document.getElementById('react-app')
+  hydrateRoot(root, <App />)
+}
+
+main()
