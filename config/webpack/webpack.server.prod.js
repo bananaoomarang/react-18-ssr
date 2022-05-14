@@ -8,7 +8,7 @@ module.exports = Object.assign({}, commonConfig, {
     name: 'server-prod-cache',
     type: 'filesystem',
     buildDependencies: {
-      config: [__filename]
+      config: [__filename, './.swcrc']
     }
   },
   module: {
@@ -17,7 +17,7 @@ module.exports = Object.assign({}, commonConfig, {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'swc-loader'
         }
       },
       {
@@ -58,7 +58,6 @@ module.exports = Object.assign({}, commonConfig, {
   },
   target: 'node',
   mode: 'production',
-  devtool: 'source-map',
   plugins: [
     ...commonConfig.plugins,
     new DefinePlugin({ WEBPACK_SERVER_BUNDLE: JSON.stringify(true) })

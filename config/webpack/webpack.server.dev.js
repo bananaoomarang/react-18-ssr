@@ -3,12 +3,11 @@ const serverProdConfig = require('./webpack.server.prod')
 module.exports = Object.assign({}, serverProdConfig, {
   watch: true,
   mode: 'development',
-  devtool: 'cheap-module-source-map',
   cache: {
     name: 'server-dev-cache',
     type: 'filesystem',
     buildDependencies: {
-      config: [__filename]
+      config: [__filename, './.swcrc']
     }
   },
   module: {
@@ -18,10 +17,7 @@ module.exports = Object.assign({}, serverProdConfig, {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            envName: 'development-server'
-          }
+          loader: 'swc-loader'
         }
       },
       ...serverProdConfig.module.rules.filter(rule => rule.use && rule.use.loader !== 'babel-loader')

@@ -12,7 +12,7 @@ module.exports = Object.assign({}, commonConfig, {
     name: 'client-dev-cache',
     type: 'filesystem',
     buildDependencies: {
-      config: [__filename]
+      config: [__filename, './.swcrc']
     }
   },
   module: {
@@ -21,7 +21,7 @@ module.exports = Object.assign({}, commonConfig, {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: 'swc-loader'
       },
       {
         test: /\.global.css$/,
